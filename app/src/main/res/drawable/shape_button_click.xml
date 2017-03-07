@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <!-- 图片的颜色 -->
+    <solid android:color="#FFFF9C" />
+    <!-- 矩形角的弧度 -->
+    <corners android:radius="5dp" />
+    <!-- width 边框的宽度 color 边框的颜色 dashWidth 边框点的大小 dashGap 每个点间距 -->
+    <stroke
+        android:width="1dp"
+        android:color="#fb9923" />
+    <!-- gradient 上面定义solid失效 -->
+
+    <gradient
+        android:centerColor="#5e9999"
+        android:endColor="#a7cacd"
+        android:startColor="#a7cacd"
+        android:type="linear" />
+
+</shape>

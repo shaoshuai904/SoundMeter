@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false" >
+
+    <padding
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp" />
+
+    <!-- width 边框的宽度 color 边框的颜色 dashWidth 边框点的大小 dashGap 每个点间距 -->
+    <stroke
+        android:width="1dp"
+        android:color="#fb9923" />
+    <!-- gradient 上面定义solid失效 -->
+    <gradient
+        android:centerColor="#5e9999"
+        android:endColor="#a7cacd"
+        android:startColor="#a7cacd"
+        android:type="linear" />
+
+    <size
+        android:height="15dp"
+        android:width="15dp" />
+
+</shape>
