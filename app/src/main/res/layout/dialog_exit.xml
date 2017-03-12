@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogFrame"
+    android:layout_width="274.0dip"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_corners_bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="fill_parent"
+        android:layout_height="84dp"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="657.4MB 可用,共 4.9G"
+        android:textColor="#ff333333"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/divider_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#ffdadada"
+        android:contentDescription="@null" />
+    <!-- 2个Button -->
+
+    <LinearLayout
+        android:id="@+id/bothBtnLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bt_left"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_leftbtn_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#ff333333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="1px"
+            android:layout_height="fill_parent"
+            android:background="#ffdadada"
+            android:contentDescription="@null" />
+
+        <Button
+            android:id="@+id/bt_right"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_rightbtn_bg"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#ff333333"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
