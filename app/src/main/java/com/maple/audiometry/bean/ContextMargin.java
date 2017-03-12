@@ -7,7 +7,6 @@ package com.maple.audiometry.bean;
  * 
  */
 public class ContextMargin {
-	public static final ContextMargin Zero = new ContextMargin(0);
 	public int bottom = 0;
 	public int left = 0;
 	public int right = 0;
