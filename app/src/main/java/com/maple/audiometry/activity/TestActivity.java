@@ -17,6 +17,7 @@ import com.maple.audiometry.dialog.TwoButtonDialog;
 import com.maple.audiometry.dialog.TwoButtonDialog.LoginInputListener;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.AudioTrackManager;
+import com.maple.audiometry.utils.T;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -188,8 +189,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener, L
                 // isLeft);// 更新折线图
             }
             if (Math.abs(sub) > 20) {
-                Toast.makeText(getApplicationContext(),
-                        "因为您的两次测试结果相差巨大，需要重测该频率", 0).show();
+                T.showShort(getBaseContext(),"因为您的两次测试结果相差巨大，需要重测该频率");
                 // 如果相差巨大，重新测试。
                 lDBMinVal[curHZ][0] = 0;
                 lDBMinVal[curHZ][1] = 0;

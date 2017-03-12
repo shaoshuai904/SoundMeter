@@ -54,8 +54,7 @@ public class MediaRecorderDemo {
 		this.mNoiseCallBack = noiseValueUpdateCallback;
 	}
 
-	public MediaRecorderDemo(File file,
-			NoiseValueUpdateCallback noiseValueUpdateCallback) {
+	public MediaRecorderDemo(File file, NoiseValueUpdateCallback noiseValueUpdateCallback) {
 		this.filePath = file.getAbsolutePath();
 		this.mNoiseCallBack = noiseValueUpdateCallback;
 	}

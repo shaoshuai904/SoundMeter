@@ -3,8 +3,6 @@ package com.maple.audiometry.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -13,13 +11,14 @@ import com.maple.audiometry.chat.MelodyView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 结果界面
  *
  * @author shaoshuai
  */
-public class ResultActivity extends Activity implements OnClickListener {
+public class ResultActivity extends Activity {
     @BindView(R.id.ll_left_result) LinearLayout ll_left_result;// 左耳测试结果
     @BindView(R.id.ll_right_result) LinearLayout ll_right_result;// 右耳测试结果
     @BindView(R.id.bt_look) Button bt_look;// 查看结果
@@ -48,26 +47,15 @@ public class ResultActivity extends Activity implements OnClickListener {
 
         initView();
 
-        bt_look.setOnClickListener(this);
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_look:// 查看结果
-                toEndPager();
-                break;
-
-            default:
-                break;
-        }
-    }
 
     /**
      * 去结果页面
      */
-    private void toEndPager() {
+    @OnClick(R.id.bt_look)
+    public void toEndPager() {
         Intent intent = new Intent(ResultActivity.this, EndActivity.class);
         Bundle bundle = new Bundle();
         bundle.putIntArray("left", leftEarDatas);// 左耳听力数据

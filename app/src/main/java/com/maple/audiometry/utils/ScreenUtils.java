@@ -11,7 +11,6 @@ import android.view.WindowManager;
 /**
  * Created by Maple on 2017/3/7.
  */
-
 public class ScreenUtils {
 
 

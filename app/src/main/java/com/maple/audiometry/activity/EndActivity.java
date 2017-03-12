@@ -3,8 +3,6 @@ package com.maple.audiometry.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,27 +10,24 @@ import com.maple.audiometry.R;
 
 import java.text.DecimalFormat;
 
+import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 测试结果
  *
  * @author shaoshuai
  */
-public class EndActivity extends Activity implements OnClickListener {
+public class EndActivity extends Activity {
     @BindView(R.id.bt_end) Button bt_end;// 退出
     @BindView(R.id.tv_check_result) TextView tv_check_result;// 检测结果
     @BindView(R.id.tv_propose) TextView tv_propose;// 分析与建议
+    // array
+    @BindArray(R.array.hearing_rank_arr) String[] hearingRank; //听力等级
+    @BindArray(R.array.propose_arr) String[] dbExplain;//分析建议的说明文字
 
-    /**
-     * 听力等级
-     */
-    private String[] hearingRank;
-    /**
-     * 分析建议的说明文字
-     */
-    private String[] dbExplain;
     int fbl[];
     int fbr[];
     double left, right;
@@ -47,15 +42,12 @@ public class EndActivity extends Activity implements OnClickListener {
         fbl = intent.getIntArrayExtra("left");
         fbr = intent.getIntArrayExtra("right");
 
-        bt_end.setOnClickListener(this);
-
         initView();
-
     }
 
     private void initView() {
-        hearingRank = getResources().getStringArray(R.array.hearing_rank_arr);
-        dbExplain = getResources().getStringArray(R.array.propose_arr);
+        // hearingRank = getResources().getStringArray(R.array.hearing_rank_arr);
+        // dbExplain = getResources().getStringArray(R.array.propose_arr);
 
         // 给出平均听力=（1000Hz测试的结果+2000Hz测试得到结果+500Hz测试得到结果）/3
         left = (fbl[0] + fbl[1] + fbl[4]) / 3.0;
@@ -72,8 +64,7 @@ public class EndActivity extends Activity implements OnClickListener {
         if (leftRank == rightRank) {
             tv_propose.setText("双耳：\n" + dbExplain[leftRank]);
         } else {
-            tv_propose.setText("左耳：\n" + dbExplain[leftRank] + "\n右耳：\n"
-                    + dbExplain[rightRank]);
+            tv_propose.setText("左耳：\n" + dbExplain[leftRank] + "\n右耳：\n" + dbExplain[rightRank]);
         }
     }
 
@@ -101,22 +92,12 @@ public class EndActivity extends Activity implements OnClickListener {
         return rank;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_end:// 退出
-                toMainPager();
-                break;
-            default:
-                break;
-        }
-
-    }
 
     /**
      * 返回主界面
      */
-    private void toMainPager() {
+    @OnClick(R.id.bt_end)
+    public void toMainPager() {
         finish();
         Intent intent = new Intent(EndActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
