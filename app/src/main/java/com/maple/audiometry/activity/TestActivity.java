@@ -3,21 +3,18 @@ package com.maple.audiometry.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.dialog.TwoButtonDialog;
-import com.maple.audiometry.dialog.TwoButtonDialog.LoginInputListener;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.AudioTrackManager;
 import com.maple.audiometry.utils.T;
+import com.maple.msdialog.AlertDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +24,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class TestActivity extends FragmentActivity implements OnClickListener, LoginInputListener {
+public class TestActivity extends FragmentActivity implements OnClickListener {
     @BindView(R.id.tv_current_hz) TextView tv_current_hz;// 当前频率
     @BindView(R.id.tv_current_db) TextView tv_current_db;// 当前分贝
     @BindView(R.id.bt_play) Button bt_play;// 播放
@@ -35,8 +32,6 @@ public class TestActivity extends FragmentActivity implements OnClickListener, L
     @BindView(R.id.bt_no) Button bt_no;// 听不到
     @BindView(R.id.tv_explain) TextView tv_explain;// 说明
 
-    private TwoButtonDialog dia;
-    private FragmentManager fm = getSupportFragmentManager();
 
     private static final int defCurDB = 10;
     private static final int defCurHZ = 0;
@@ -105,21 +100,20 @@ public class TestActivity extends FragmentActivity implements OnClickListener, L
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // // 按下的如果是BACK，同时没有重复
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            dia = new TwoButtonDialog("是否退出当前测试？", "退出", "取消");
-            dia.show(fm, "EXIT");
+            new AlertDialog(TestActivity.this)
+                    .setTitle("是否退出当前测试？")
+                    .setLeftButton("取消", null)
+                    .setRightButton("退出", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    })
+                    .show();
         }
         return false;
     }
 
-    /**
-     * 退出系统Dialog,返回的数据
-     */
-    @Override
-    public void onLoginInputComplete(String message) {
-        if (message.equals("退出")) {
-            finish(); // 退出
-        }
-    }
 
     @Override
     public void onClick(View view) {
@@ -189,7 +183,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener, L
                 // isLeft);// 更新折线图
             }
             if (Math.abs(sub) > 20) {
-                T.showShort(getBaseContext(),"因为您的两次测试结果相差巨大，需要重测该频率");
+                T.showShort(getBaseContext(), "因为您的两次测试结果相差巨大，需要重测该频率");
                 // 如果相差巨大，重新测试。
                 lDBMinVal[curHZ][0] = 0;
                 lDBMinVal[curHZ][1] = 0;

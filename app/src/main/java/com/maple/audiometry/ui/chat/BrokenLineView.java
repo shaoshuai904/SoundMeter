@@ -1,4 +1,4 @@
-package com.maple.audiometry.chat;
+package com.maple.audiometry.ui.chat;
 
 import java.util.Date;
 
@@ -75,7 +75,7 @@ public class BrokenLineView extends View {
 	/**
 	 * 更新视图
 	 * 
-	 * @param dates
+	 * @param shorts
 	 */
 	public void updateDate(double[] shorts) {
 		mDataset.removeSeries(timeSeries);

@@ -6,19 +6,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.chat.BrokenLineView;
-import com.maple.audiometry.dialog.TwoButtonDialog;
-import com.maple.audiometry.dialog.TwoButtonDialog.LoginInputListener;
+import com.maple.audiometry.ui.chat.BrokenLineView;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.MediaRecorderDemo;
 import com.maple.audiometry.utils.MediaRecorderDemo.NoiseValueUpdateCallback;
+import com.maple.msdialog.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class NoiseCheckActivity extends FragmentActivity implements LoginInputListener {
+public class NoiseCheckActivity extends FragmentActivity {
     @BindView(R.id.tv_noise_value) TextView tv_noise_value;// 当前噪音值
     @BindView(R.id.tv_max_value) TextView tv_max_value;// 最大噪音值
     @BindView(R.id.tv_avg_value) TextView tv_avg_value;// 平均噪音值
@@ -54,7 +53,6 @@ public class NoiseCheckActivity extends FragmentActivity implements LoginInputLi
      */
     private MediaRecorderDemo media;
     private BrokenLineView mBrokenLine;
-    private TwoButtonDialog dia;
 
     private double maxVolume = 0;
     private double minVolume = 99990;
@@ -66,7 +64,6 @@ public class NoiseCheckActivity extends FragmentActivity implements LoginInputLi
      * 噪音分贝值 的说明文字
      */
     private String[] dbExplain;
-    private FragmentManager fm = getSupportFragmentManager();
     /**
      * 更新噪音标志
      */
@@ -81,18 +78,9 @@ public class NoiseCheckActivity extends FragmentActivity implements LoginInputLi
                     long time = System.currentTimeMillis() - startTime;
                     if (time >= checkTime) {// 检测完成
                         media.stopRecord();
-                        // 平均噪音分贝 > 40dB
-                        if (ArrayUtils.avg(allVolume) > 40) {
-                            dia = new TwoButtonDialog("您的监测环境不适合后面的测试，请您到较安静的环境下测试。", "重新检测", "取消");
-                            dia.show(fm, "RE_CHECK");
-                        } else {
-                            dia = new TwoButtonDialog("您的测试环境良好，可以继续后面测试。", "进入测试",
-                                    "取消");
-                            dia.show(fm, "EXIT");
-                        }
+                        showDialog();
                     }
-                    mBrokenLine.updateDate(ArrayUtils.sub(allVolume,
-                            mBrokenLine.maxCacheNum));
+                    mBrokenLine.updateDate(ArrayUtils.sub(allVolume, mBrokenLine.maxCacheNum));
                     updateNoise(db);
                     break;
                 case 2:// 进入下一个界面
@@ -101,6 +89,34 @@ public class NoiseCheckActivity extends FragmentActivity implements LoginInputLi
         }
 
     };
+
+    private void showDialog() {
+        // 平均噪音分贝 > 40dB
+        if (ArrayUtils.avg(allVolume) > 40) {
+            new AlertDialog(NoiseCheckActivity.this)
+                    .setMsg("您的监测环境不适合后面的测试，请您到较安静的环境下测试。")
+                    .setLeftButton("取消", null)
+                    .setRightButton("重新检测", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toMainPager();
+                        }
+                    })
+                    .show();
+        } else {
+            new AlertDialog(NoiseCheckActivity.this)
+                    .setMsg("您的测试环境良好，可以继续后面测试。")
+                    .setLeftButton("取消", null)
+                    .setRightButton("进入测试", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toCheckEar();
+                        }
+                    })
+                    .show();
+        }
+    }
+
     /**
      * 检测噪音
      */
@@ -141,24 +157,18 @@ public class NoiseCheckActivity extends FragmentActivity implements LoginInputLi
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // // 按下的如果是BACK，同时没有重复
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            dia = new TwoButtonDialog("是否退出检测？", "退出", "取消");
-            dia.show(fm, "EXIT");
+            new AlertDialog(NoiseCheckActivity.this)
+                    .setTitle("是否退出检测？")
+                    .setLeftButton("取消", null)
+                    .setRightButton("退出", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    })
+                    .show();
         }
         return false;
-    }
-
-    /**
-     * 退出系统Dialog,返回的数据
-     */
-    @Override
-    public void onLoginInputComplete(String message) {
-        if (message.equals("退出")) {
-            finish();
-        } else if (message.equals("重新检测")) {
-            toMainPager();
-        } else if (message.equals("进入测试")) {
-            toCheckEar();
-        }
     }
 
     @Override

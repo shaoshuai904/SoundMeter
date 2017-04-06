@@ -117,6 +117,6 @@ public class VoiceActivity extends Activity implements OnClickListener {
         Bundle bundle = new Bundle();// 封装数据 bundle 捆 类似于Map
         bundle.putBoolean("isLeft", isLeft);// 音量得分
         intent.putExtras(bundle); // 发送数据 extra 附加物
-        startActivity(intent);// 开启目标Activity
+        startActivity(intent);
     }
 }

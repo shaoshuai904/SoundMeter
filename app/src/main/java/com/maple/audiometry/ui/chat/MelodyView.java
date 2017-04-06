@@ -1,4 +1,4 @@
-package com.maple.audiometry.chat;
+package com.maple.audiometry.ui.chat;
 
 import java.util.ArrayList;
 import java.util.List;

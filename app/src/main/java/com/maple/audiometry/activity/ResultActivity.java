@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.chat.MelodyView;
+import com.maple.audiometry.ui.chat.MelodyView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,9 +47,7 @@ public class ResultActivity extends Activity {
 
         initView();
 
-
     }
-
 
     /**
      * 去结果页面

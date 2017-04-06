@@ -119,8 +119,7 @@ public class SplashActivity extends Activity {
      */
     private void selectPage(int current) {
         for (int i = 0; i < guide_dot_iv.length; i++) {
-            guide_dot_iv[current]
-                    .setImageResource(R.drawable.guide_dot_pressed);
+            guide_dot_iv[current].setImageResource(R.drawable.guide_dot_pressed);
             if (current != i) {
                 guide_dot_iv[i].setImageResource(R.drawable.guide_dot_normal);
             }
