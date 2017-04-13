@@ -94,14 +94,14 @@ public class VoiceActivity extends Activity implements OnClickListener {
      * 播放声音
      *
      * @param hz     频率角标
-     * @param isleft 是否是左耳
+     * @param isLeft 是否是左耳
      */
-    public void start(int hz, int db, boolean isleft) {
+    public void start(int hz, int db, boolean isLeft) {
         if (audio != null)
             audio.stop();
         audio = new AudioTrackManager();
         audio.setRate(hz, db);// 设置频率
-        if (isleft) {
+        if (isLeft) {
             audio.start(AudioTrackManager.LEFT);
         } else {
             audio.start(AudioTrackManager.RIGHT);

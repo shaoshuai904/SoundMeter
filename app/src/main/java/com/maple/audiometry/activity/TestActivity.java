@@ -36,9 +36,8 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
     private static final int defCurDB = 10;
     private static final int defCurHZ = 0;
     private int[] hzArr = new int[]{1000, 2000, 4000, 8000, 500, 250};
-    private int[] dBArr = new int[]{-10, -5, 0, 5, 10, 15, 20, 25, 30, 35,
-            40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115,
-            120};
+    private int[] dBArr = new int[]{-10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50,
+            55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120};
     private int[][] lDBMinVal = new int[6][2];
     private int[][] rDBMinVal = new int[6][2];
     /**
@@ -52,7 +51,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
     /**
      * 是否第一次听到
      */
-    boolean isFrist = true;
+    boolean isFirst = true;
     /**
      * 是否测试左耳
      */
@@ -128,11 +127,11 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
             case R.id.bt_no:// 听不到
                 if (isLeft) {
                     if (lDBMinVal[curHZ][0] != 0) {
-                        isFrist = false;// 不是第一次了
+                        isFirst = false;// 不是第一次了
                     }
                 } else {
                     if (rDBMinVal[curHZ][0] != 0) {
-                        isFrist = false;// 不是第一次了
+                        isFirst = false;// 不是第一次了
                     }
                 }
                 curDB = revise(curDB + 1, 0, dBArr.length - 1);
@@ -149,7 +148,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
      * 听到-执行动作
      */
     private void yesAction() {
-        if (isFrist) {// 第一次
+        if (isFirst) {// 第一次
             if (isLeft) {
                 lDBMinVal[curHZ][0] = dBArr[curDB];// 保存左耳当前频率的第一次听到数据
             } else {
@@ -188,7 +187,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
                 lDBMinVal[curHZ][0] = 0;
                 lDBMinVal[curHZ][1] = 0;
                 curDB = defCurDB;// 重置分贝
-                isFrist = true;// 又是第一次
+                isFirst = true;// 又是第一次
                 tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
                 tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
 
@@ -199,7 +198,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
                 if (curHZ < hzArr.length - 1) {
                     curHZ++;// 更换频率
                     curDB = defCurDB;// 重置分贝
-                    isFrist = true;// 又是第一次
+                    isFirst = true;// 又是第一次
                     tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
                     tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
 
@@ -235,7 +234,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
      */
     private void checkRight() {
         isLeft = false;
-        isFrist = true;
+        isFirst = true;
         rDBMinVal = new int[6][2];
         curDB = defCurDB;
         curHZ = defCurHZ;
@@ -249,7 +248,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
      */
     private void checkLeft() {
         isLeft = true;
-        isFrist = true;
+        isFirst = true;
         lDBMinVal = new int[6][2];
         curDB = defCurDB;
         curHZ = defCurHZ;
@@ -282,14 +281,14 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
      * 播放声音
      *
      * @param hz     频率角标
-     * @param isleft 是否是左耳
+     * @param isLeft 是否是左耳
      */
-    public void start(int hz, int db, boolean isleft) {
+    public void start(int hz, int db, boolean isLeft) {
         if (audio != null)
             audio.stop();
         audio = new AudioTrackManager();
         audio.setRate(hz, db);// 设置频率
-        if (isleft) {
+        if (isLeft) {
             audio.start(AudioTrackManager.LEFT);
         } else {
             audio.start(AudioTrackManager.RIGHT);

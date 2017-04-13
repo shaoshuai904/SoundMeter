@@ -25,4 +25,5 @@
     <color name="button_focus_text_color">#00a651</color> <!-- button选中字体颜色 -->
     <color name="button_bg_default">#FFFFFF</color>
     <color name="button_bg_pressed">#F1F1F1</color>
+
 </resources>

@@ -48,6 +48,7 @@ public class MainActivity extends FragmentActivity {
         // // 按下的如果是BACK，同时没有重复
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             new AlertDialog(MainActivity.this)
+                    .setScaleWidth(0.7)
                     .setTitle("是否退出？")
                     .setLeftButton("取消", null)
                     .setRightButton("退出", new View.OnClickListener() {

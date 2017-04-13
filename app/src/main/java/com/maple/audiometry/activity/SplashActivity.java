@@ -55,15 +55,12 @@ public class SplashActivity extends Activity {
         guide_dot_iv[1] = (ImageView) findViewById(R.id.guide_dot2_iv);
         guide_dot_iv[2] = (ImageView) findViewById(R.id.guide_dot3_iv);
         // 初始化页面
-        guideView1 = LayoutInflater.from(this).inflate(
-                R.layout.activity_guide_view1, null);
-        guideView2 = LayoutInflater.from(this).inflate(
-                R.layout.activity_guide_view2, null);
-        guideView3 = LayoutInflater.from(this).inflate(
-                R.layout.activity_guide_view3, null);
+        guideView1 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view1, null);
+        guideView2 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view2, null);
+        guideView3 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view3, null);
         guide_start_btn = (Button) guideView3.findViewById(R.id.next);
         // 添加页面
-        guideViews = new ArrayList<View>();
+        guideViews = new ArrayList<>();
         guideViews.add(guideView1);
         guideViews.add(guideView2);
         guideViews.add(guideView3);
@@ -82,7 +79,7 @@ public class SplashActivity extends Activity {
             }
         });
 
-        guide_viewpager.setOnPageChangeListener(new OnPageChangeListener() {
+        guide_viewpager.addOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
