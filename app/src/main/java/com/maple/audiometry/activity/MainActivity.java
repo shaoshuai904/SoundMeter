@@ -1,5 +1,6 @@
 package com.maple.audiometry.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.utils.permission.PermissionFragment;
 import com.maple.msdialog.AlertDialog;
 
 import butterknife.ButterKnife;
@@ -27,6 +29,12 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        String[] permissionList = new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO};
+        PermissionFragment.getPermissionFragment(this)
+                .checkPermissions(permissionList, null);
     }
 
     // 去检测噪音
@@ -45,7 +53,6 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // // 按下的如果是BACK，同时没有重复
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             new AlertDialog(MainActivity.this)
                     .setScaleWidth(0.7)

@@ -1,5 +1,6 @@
 package com.maple.audiometry.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import com.maple.audiometry.ui.chat.BrokenLineView;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.MediaRecorderDemo;
 import com.maple.audiometry.utils.MediaRecorderDemo.NoiseValueUpdateCallback;
+import com.maple.audiometry.utils.T;
+import com.maple.audiometry.utils.permission.PermissionFragment;
+import com.maple.audiometry.utils.permission.PermissionListener;
 import com.maple.msdialog.AlertDialog;
 
 import java.util.ArrayList;
@@ -152,7 +156,25 @@ public class NoiseCheckActivity extends FragmentActivity {
 
         dbExplain = getResources().getStringArray(R.array.db_explain_arr);
 
-        handler.post(checkNoise);
+
+        String[] permissionList = new String[]{Manifest.permission.RECORD_AUDIO};
+        PermissionFragment.getPermissionFragment(this)
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        handler.post(checkNoise);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(String[] deniedPermissions) {
+                        T.showShort(getBaseContext(), "请开启录音权限！");
+                    }
+
+                    @Override
+                    public void onPermissionDeniedDotAgain(String[] deniedPermissions) {
+                    }
+                })
+                .checkPermissions(permissionList, null);
     }
 
     @Override
