@@ -95,7 +95,7 @@ public class NoiseCheckActivity extends FragmentActivity {
         if (ArrayUtils.avg(allVolume) > 40) {
             new AlertDialog(NoiseCheckActivity.this)
                     .setScaleWidth(0.7)
-                    .setMsg("您的监测环境不适合后面的测试，请您到较安静的环境下测试。")
+                    .setMessage("您的监测环境不适合后面的测试，请您到较安静的环境下测试。")
                     .setLeftButton("取消", null)
                     .setRightButton("重新检测", new View.OnClickListener() {
                         @Override
@@ -107,7 +107,7 @@ public class NoiseCheckActivity extends FragmentActivity {
         } else {
             new AlertDialog(NoiseCheckActivity.this)
                     .setScaleWidth(0.7)
-                    .setMsg("您的测试环境良好，可以继续后面测试。")
+                    .setMessage("您的测试环境良好，可以继续后面测试。")
                     .setLeftButton("取消", null)
                     .setRightButton("进入测试", new View.OnClickListener() {
                         @Override
