@@ -1,13 +1,13 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 import com.maple.audiometry.utils.permission.PermissionFragment;
 import com.maple.msdialog.AlertDialog;
 
@@ -19,10 +19,7 @@ import butterknife.OnClick;
  *
  * @author shaoshuai
  */
-public class MainActivity extends FragmentActivity {
-//    @BindView(R.id.noise) Button noise;// 检测噪音
-//    @BindView(R.id.voice) Button voice;// 纯音测试
-
+public class MainActivity extends BaseFragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +37,21 @@ public class MainActivity extends FragmentActivity {
     // 去检测噪音
     @OnClick(R.id.noise)
     public void toCheckNoise() {
-        Intent intent = new Intent(MainActivity.this, NoiseCheckActivity.class);
+        Intent intent = new Intent(this, NoiseCheckActivity.class);
         startActivity(intent);
     }
 
     // 去检查耳朵
     @OnClick(R.id.voice)
     public void toCheckEar() {
-        Intent intent = new Intent(MainActivity.this, VoiceActivity.class);
+        Intent intent = new Intent(this, VoiceActivity.class);
         startActivity(intent);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            new AlertDialog(MainActivity.this)
+            new AlertDialog(this)
                     .setScaleWidth(0.7)
                     .setTitle("是否退出？")
                     .setLeftButton("取消", null)

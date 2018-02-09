@@ -1,8 +1,7 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.AudioTrackManager;
 import com.maple.audiometry.utils.T;
@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class TestActivity extends FragmentActivity implements OnClickListener {
+public class TestActivity extends BaseFragmentActivity implements OnClickListener {
+    @BindView(R.id.tv_play_des) TextView tv_play_des;
     @BindView(R.id.tv_current_hz) TextView tv_current_hz;// 当前频率
     @BindView(R.id.tv_current_db) TextView tv_current_db;// 当前分贝
     @BindView(R.id.bt_play) Button bt_play;// 播放
@@ -40,29 +41,17 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
             55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120};
     private int[][] lDBMinVal = new int[6][2];
     private int[][] rDBMinVal = new int[6][2];
-    /**
-     * 当前分贝索引
-     */
+    /** 当前分贝索引 */
     int curDB = defCurDB;
-    /**
-     * 当前频率索引
-     */
+    /** 当前频率索引 */
     int curHZ = defCurHZ;
-    /**
-     * 是否第一次听到
-     */
+    /** 是否第一次听到 */
     boolean isFirst = true;
-    /**
-     * 是否测试左耳
-     */
+    /** 是否测试左耳 */
     boolean isLeft = true;
-    /**
-     * 左耳测试完成
-     */
+    /** 左耳测试完成 */
     boolean leftCheckOver = false;
-    /**
-     * 右耳测试完成
-     */
+    /** 右耳测试完成 */
     boolean rightCheckOver = false;
 
     AudioTrackManager audio;
@@ -73,8 +62,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
         setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = getIntent().getExtras();
         isLeft = bundle.getBoolean("isLeft");
         if (isLeft) {
             tv_explain.setText("左耳");
@@ -97,7 +85,6 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // // 按下的如果是BACK，同时没有重复
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             new AlertDialog(TestActivity.this)
                     .setTitle("是否退出当前测试？")
@@ -188,6 +175,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
                 lDBMinVal[curHZ][1] = 0;
                 curDB = defCurDB;// 重置分贝
                 isFirst = true;// 又是第一次
+                tv_play_des.setText(hzArr[curHZ] + " Hz\n" + dBArr[curDB] + " dB");
                 tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
                 tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
 
@@ -199,6 +187,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
                     curHZ++;// 更换频率
                     curDB = defCurDB;// 重置分贝
                     isFirst = true;// 又是第一次
+                    tv_play_des.setText(hzArr[curHZ] + " Hz\n" + dBArr[curDB] + " dB");
                     tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
                     tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
 
@@ -238,6 +227,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
         rDBMinVal = new int[6][2];
         curDB = defCurDB;
         curHZ = defCurHZ;
+        tv_play_des.setText(hzArr[curHZ] + " Hz\n" + dBArr[curDB] + " dB");
         tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
         tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
         tv_explain.setText("右耳");
@@ -252,6 +242,7 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
         lDBMinVal = new int[6][2];
         curDB = defCurDB;
         curHZ = defCurHZ;
+        tv_play_des.setText(hzArr[curHZ] + " Hz\n" + dBArr[curDB] + " dB");
         tv_current_hz.setText("当前频率:\n " + hzArr[curHZ] + " Hz");
         tv_current_db.setText("当前分贝:\n " + dBArr[curDB] + " dB");
         tv_explain.setText("左耳");
@@ -270,11 +261,11 @@ public class TestActivity extends FragmentActivity implements OnClickListener {
 
         finish();
         Intent intent = new Intent(TestActivity.this, ResultActivity.class);
-        Bundle bundle = new Bundle();// 封装数据 bundle 捆 类似于Map
+        Bundle bundle = new Bundle();
         bundle.putIntArray("left", lDB);// 左耳听力数据
         bundle.putIntArray("right", rDB);// 右耳听力数据
-        intent.putExtras(bundle); // 发送数据 extra 附加物
-        startActivity(intent);// 开启目标Activity
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**

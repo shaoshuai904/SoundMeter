@@ -1,12 +1,12 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 import com.maple.audiometry.ui.chat.MelodyView;
 
 import butterknife.BindView;
@@ -18,7 +18,7 @@ import butterknife.OnClick;
  *
  * @author shaoshuai
  */
-public class ResultActivity extends Activity {
+public class ResultActivity extends BaseFragmentActivity {
     @BindView(R.id.ll_left_result) LinearLayout ll_left_result;// 左耳测试结果
     @BindView(R.id.ll_right_result) LinearLayout ll_right_result;// 右耳测试结果
     @BindView(R.id.bt_look) Button bt_look;// 查看结果
@@ -40,13 +40,11 @@ public class ResultActivity extends Activity {
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = getIntent().getExtras();
         leftEarDatas = bundle.getIntArray("left");
         rightEarDatas = bundle.getIntArray("right");
 
         initView();
-
     }
 
     /**
@@ -54,7 +52,7 @@ public class ResultActivity extends Activity {
      */
     @OnClick(R.id.bt_look)
     public void toEndPager() {
-        Intent intent = new Intent(ResultActivity.this, EndActivity.class);
+        Intent intent = new Intent(this, EndActivity.class);
         Bundle bundle = new Bundle();
         bundle.putIntArray("left", leftEarDatas);// 左耳听力数据
         bundle.putIntArray("right", rightEarDatas);// 右耳听力数据
@@ -75,8 +73,7 @@ public class ResultActivity extends Activity {
         ll_left_result.removeAllViews();
         ll_left_result.addView(mLeftEar, param);
         // 初始化左耳折线图
-        mRightEar = new MelodyView(getApplicationContext(),
-                MelodyView.ONLY_RIGHT);
+        mRightEar = new MelodyView(getApplicationContext(), MelodyView.ONLY_RIGHT);
         mRightEar.setYScope(120, -10);// 设置最大最小值
         ll_right_result.removeAllViews();
         ll_right_result.addView(mRightEar, param);

@@ -1,6 +1,5 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -10,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 import com.maple.audiometry.utils.AudioTrackManager;
 
 import butterknife.BindView;
@@ -20,10 +20,10 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class VoiceActivity extends Activity implements OnClickListener {
+public class VoiceActivity extends BaseFragmentActivity implements OnClickListener {
+    @BindView(R.id.bt_test) Button bt_test;
     @BindView(R.id.bt_left) Button bt_left;// 左耳检测
     @BindView(R.id.bt_right) Button bt_right;// 右耳检测
-    @BindView(R.id.bt_test) Button bt_test;// 下一步
 
     AudioTrackManager audio;
     float volume;
@@ -113,10 +113,10 @@ public class VoiceActivity extends Activity implements OnClickListener {
      * 前往测试界面
      */
     private void toTestPager(boolean isLeft) {
-        Intent intent = new Intent(VoiceActivity.this, TestActivity.class);
-        Bundle bundle = new Bundle();// 封装数据 bundle 捆 类似于Map
-        bundle.putBoolean("isLeft", isLeft);// 音量得分
-        intent.putExtras(bundle); // 发送数据 extra 附加物
+        Intent intent = new Intent(this, TestActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isLeft", isLeft);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
