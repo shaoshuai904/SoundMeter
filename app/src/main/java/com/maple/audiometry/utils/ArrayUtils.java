@@ -55,10 +55,6 @@ public class ArrayUtils {
 
     /**
      * 截取数组
-     *
-     * @param allVolume
-     * @param num
-     * @return
      */
     public static double[] sub(List<Double> allVolume, int num) {
         double[] dous = new double[num];

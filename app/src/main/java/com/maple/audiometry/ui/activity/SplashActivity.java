@@ -49,16 +49,17 @@ public class SplashActivity extends BaseFragmentActivity {
      */
     @SuppressLint("InflateParams")
     private void initViews() {
+        // 初始化页面
+        LayoutInflater inflater = LayoutInflater.from(this);
+        guideView1 = inflater.inflate(R.layout.activity_guide_view1, null);
+        guideView2 = inflater.inflate(R.layout.activity_guide_view2, null);
+        guideView3 = inflater.inflate(R.layout.activity_guide_view3, null);
+        guide_start_btn = guideView3.findViewById(R.id.next);
         // 初始化点
         guide_dot_iv = new ImageView[3];
         guide_dot_iv[0] = findViewById(R.id.guide_dot1_iv);
         guide_dot_iv[1] = findViewById(R.id.guide_dot2_iv);
         guide_dot_iv[2] = findViewById(R.id.guide_dot3_iv);
-        // 初始化页面
-        guideView1 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view1, null);
-        guideView2 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view2, null);
-        guideView3 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view3, null);
-        guide_start_btn = guideView3.findViewById(R.id.next);
         // 添加页面
         guideViews = new ArrayList<>();
         guideViews.add(guideView1);
@@ -88,12 +89,10 @@ public class SplashActivity extends BaseFragmentActivity {
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-
             }
 
             @Override
             public void onPageScrollStateChanged(int arg0) {
-
             }
         });
     }

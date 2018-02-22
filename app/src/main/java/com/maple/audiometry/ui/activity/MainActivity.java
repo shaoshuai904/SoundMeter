@@ -27,11 +27,12 @@ public class MainActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        String[] permissionList = new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO};
+
         PermissionFragment.getPermissionFragment(this)
-                .checkPermissions(permissionList, null);
+                .checkPermissions(new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO
+                }, null);
     }
 
     // 去检测噪音
@@ -47,7 +48,7 @@ public class MainActivity extends BaseFragmentActivity {
         Intent intent = new Intent(this, VoiceActivity.class);
         startActivity(intent);
     }
-
+    // 1024398
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {

@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
  * SharedPreferences Utils
  *
  * @author maple
- * @time 16/4/14 下午5:37
+ * @time 16/4/14
  */
 public class SPUtils {
 
