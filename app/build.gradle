@@ -7,7 +7,7 @@ android {
         applicationId "com.maple.audiometry"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 4
+        versionCode 6
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

@@ -1,7 +1,6 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 
 import com.maple.audiometry.R;
 import com.maple.audiometry.adapter.GuideViewPagerAdapter;
+import com.maple.audiometry.base.BaseFragmentActivity;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseFragmentActivity {
     @BindView(R.id.guide_viewpager) ViewPager guide_viewpager;// vp
 
     private Button guide_start_btn;// 进入按钮
@@ -49,16 +49,17 @@ public class SplashActivity extends Activity {
      */
     @SuppressLint("InflateParams")
     private void initViews() {
+        // 初始化页面
+        LayoutInflater inflater = LayoutInflater.from(this);
+        guideView1 = inflater.inflate(R.layout.activity_guide_view1, null);
+        guideView2 = inflater.inflate(R.layout.activity_guide_view2, null);
+        guideView3 = inflater.inflate(R.layout.activity_guide_view3, null);
+        guide_start_btn = guideView3.findViewById(R.id.next);
         // 初始化点
         guide_dot_iv = new ImageView[3];
-        guide_dot_iv[0] = (ImageView) findViewById(R.id.guide_dot1_iv);
-        guide_dot_iv[1] = (ImageView) findViewById(R.id.guide_dot2_iv);
-        guide_dot_iv[2] = (ImageView) findViewById(R.id.guide_dot3_iv);
-        // 初始化页面
-        guideView1 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view1, null);
-        guideView2 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view2, null);
-        guideView3 = LayoutInflater.from(this).inflate(R.layout.activity_guide_view3, null);
-        guide_start_btn = (Button) guideView3.findViewById(R.id.next);
+        guide_dot_iv[0] = findViewById(R.id.guide_dot1_iv);
+        guide_dot_iv[1] = findViewById(R.id.guide_dot2_iv);
+        guide_dot_iv[2] = findViewById(R.id.guide_dot3_iv);
         // 添加页面
         guideViews = new ArrayList<>();
         guideViews.add(guideView1);
@@ -88,12 +89,10 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-
             }
 
             @Override
             public void onPageScrollStateChanged(int arg0) {
-
             }
         });
     }
@@ -103,9 +102,9 @@ public class SplashActivity extends Activity {
      */
     private void goMainUi() {
         finish();
-        // overridePendingTransition(android.R.anim.slide_in_left,
-        // android.R.anim.slide_out_right);
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        // overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

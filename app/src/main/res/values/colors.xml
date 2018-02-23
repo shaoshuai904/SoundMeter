@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="main_bg">#EEEEEE</color>
     <color name="topbar_bg">#E63434</color> <!-- 标题头 -->

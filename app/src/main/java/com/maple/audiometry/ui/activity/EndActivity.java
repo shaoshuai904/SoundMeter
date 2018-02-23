@@ -1,12 +1,12 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 
 import java.text.DecimalFormat;
 
@@ -20,7 +20,7 @@ import butterknife.OnClick;
  *
  * @author shaoshuai
  */
-public class EndActivity extends Activity {
+public class EndActivity extends BaseFragmentActivity {
     @BindView(R.id.bt_end) Button bt_end;// 退出
     @BindView(R.id.tv_check_result) TextView tv_check_result;// 检测结果
     @BindView(R.id.tv_propose) TextView tv_propose;// 分析与建议
@@ -99,7 +99,7 @@ public class EndActivity extends Activity {
     @OnClick(R.id.bt_end)
     public void toMainPager() {
         finish();
-        Intent intent = new Intent(EndActivity.this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

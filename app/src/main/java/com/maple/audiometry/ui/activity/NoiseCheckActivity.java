@@ -1,11 +1,11 @@
-package com.maple.audiometry.activity;
+package com.maple.audiometry.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
@@ -13,10 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
+import com.maple.audiometry.base.BaseFragmentActivity;
 import com.maple.audiometry.ui.chat.BrokenLineView;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.MediaRecorderDemo;
 import com.maple.audiometry.utils.MediaRecorderDemo.NoiseValueUpdateCallback;
+import com.maple.audiometry.utils.T;
+import com.maple.audiometry.utils.permission.PermissionFragment;
+import com.maple.audiometry.utils.permission.PermissionListener;
 import com.maple.msdialog.AlertDialog;
 
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class NoiseCheckActivity extends FragmentActivity {
+public class NoiseCheckActivity extends BaseFragmentActivity {
     @BindView(R.id.tv_noise_value) TextView tv_noise_value;// 当前噪音值
     @BindView(R.id.tv_max_value) TextView tv_max_value;// 最大噪音值
     @BindView(R.id.tv_avg_value) TextView tv_avg_value;// 平均噪音值
@@ -40,33 +44,21 @@ public class NoiseCheckActivity extends FragmentActivity {
     @BindView(R.id.tv_db_explain1) TextView tv_db_explain1;// 分贝说明1
     @BindView(R.id.tv_db_explain2) TextView tv_db_explain2;// 分贝说明2
 
-    /**
-     * 检测时间最大时间
-     */
+    /** 检测时间最大时间 */
     private static final int checkTime = 15 * 1000;
-    /**
-     * 检测噪音的开始时间
-     */
+    /** 检测噪音的开始时间 */
     private long startTime = 0;
-    /**
-     * 检测噪音工具类
-     */
+    /** 检测噪音工具类 */
     private MediaRecorderDemo media;
     private BrokenLineView mBrokenLine;
 
     private double maxVolume = 0;
     private double minVolume = 99990;
-    /**
-     * 检测到的所有噪音分贝值
-     */
-    private List<Double> allVolume = new ArrayList<Double>();
-    /**
-     * 噪音分贝值 的说明文字
-     */
+    /** 检测到的所有噪音分贝值 */
+    private List<Double> allVolume = new ArrayList<>();
+    /** 噪音分贝值 的说明文字 */
     private String[] dbExplain;
-    /**
-     * 更新噪音标志
-     */
+    /** 更新噪音标志 */
     private static final int UPDATE_NOISE_VALUE = 1;
 
     @SuppressLint("HandlerLeak")
@@ -152,7 +144,25 @@ public class NoiseCheckActivity extends FragmentActivity {
 
         dbExplain = getResources().getStringArray(R.array.db_explain_arr);
 
-        handler.post(checkNoise);
+
+        String[] permissionList = new String[]{Manifest.permission.RECORD_AUDIO};
+        PermissionFragment.getPermissionFragment(this)
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        handler.post(checkNoise);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(String[] deniedPermissions) {
+                        T.showShort(getBaseContext(), "请开启录音权限！");
+                    }
+
+                    @Override
+                    public void onPermissionDeniedDotAgain(String[] deniedPermissions) {
+                    }
+                })
+                .checkPermissions(permissionList, null);
     }
 
     @Override
@@ -187,7 +197,7 @@ public class NoiseCheckActivity extends FragmentActivity {
      */
     private void toCheckEar() {
         finish();
-        Intent intent = new Intent(NoiseCheckActivity.this, VoiceActivity.class);
+        Intent intent = new Intent(this, VoiceActivity.class);
         startActivity(intent);
     }
 

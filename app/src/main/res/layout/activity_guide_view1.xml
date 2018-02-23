@@ -4,7 +4,7 @@
                 android:background="@drawable/first">
 
     <ImageView
-        android:layout_width="120dip"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
