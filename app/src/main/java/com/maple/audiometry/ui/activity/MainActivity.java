@@ -27,7 +27,6 @@ public class MainActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
         PermissionFragment.getPermissionFragment(this)
                 .checkPermissions(new String[]{
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -48,6 +47,7 @@ public class MainActivity extends BaseFragmentActivity {
         Intent intent = new Intent(this, VoiceActivity.class);
         startActivity(intent);
     }
+
     // 1024398
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
