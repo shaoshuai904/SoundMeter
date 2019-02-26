@@ -1,6 +1,5 @@
 package com.maple.audiometry.ui.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,7 +7,6 @@ import android.view.View;
 
 import com.maple.audiometry.R;
 import com.maple.audiometry.base.BaseFragmentActivity;
-import com.maple.audiometry.utils.permission.PermissionFragment;
 import com.maple.msdialog.AlertDialog;
 
 import butterknife.ButterKnife;
@@ -26,12 +24,6 @@ public class MainActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        PermissionFragment.getPermissionFragment(this)
-                .checkPermissions(new String[]{
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.RECORD_AUDIO
-                }, null);
     }
 
     // 去检测噪音

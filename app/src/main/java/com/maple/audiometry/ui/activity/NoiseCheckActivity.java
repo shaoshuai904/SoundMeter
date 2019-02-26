@@ -18,9 +18,7 @@ import com.maple.audiometry.ui.chat.BrokenLineView;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.MediaRecorderDemo;
 import com.maple.audiometry.utils.MediaRecorderDemo.NoiseValueUpdateCallback;
-import com.maple.audiometry.utils.T;
-import com.maple.audiometry.utils.permission.PermissionFragment;
-import com.maple.audiometry.utils.permission.PermissionListener;
+import com.maple.audiometry.utils.permission.RxPermissions;
 import com.maple.msdialog.AlertDialog;
 
 import java.util.ArrayList;
@@ -28,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
 
 /**
  * 噪音检测
@@ -143,26 +142,16 @@ public class NoiseCheckActivity extends BaseFragmentActivity {
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
         dbExplain = getResources().getStringArray(R.array.db_explain_arr);
-
-
-        String[] permissionList = new String[]{Manifest.permission.RECORD_AUDIO};
-        PermissionFragment.getPermissionFragment(this)
-                .setPermissionListener(new PermissionListener() {
+        new RxPermissions(this)
+                .request(Manifest.permission.RECORD_AUDIO)
+                .subscribe(new Consumer<Boolean>() {
                     @Override
-                    public void onPermissionGranted() {
-                        handler.post(checkNoise);
+                    public void accept(Boolean b) {
+                        if (b){
+                            handler.post(checkNoise);
+                        }
                     }
-
-                    @Override
-                    public void onPermissionDenied(String[] deniedPermissions) {
-                        T.showShort(getBaseContext(), "请开启录音权限！");
-                    }
-
-                    @Override
-                    public void onPermissionDeniedDotAgain(String[] deniedPermissions) {
-                    }
-                })
-                .checkPermissions(permissionList, null);
+                });
     }
 
     @Override

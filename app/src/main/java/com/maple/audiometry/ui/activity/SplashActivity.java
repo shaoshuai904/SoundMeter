@@ -1,5 +1,6 @@
 package com.maple.audiometry.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import com.maple.audiometry.R;
 import com.maple.audiometry.adapter.GuideViewPagerAdapter;
 import com.maple.audiometry.base.BaseFragmentActivity;
+import com.maple.audiometry.utils.permission.RxPermissions;
 
 import java.util.ArrayList;
 
@@ -42,6 +44,12 @@ public class SplashActivity extends BaseFragmentActivity {
 
         initViews();
         initListeners();
+        new RxPermissions(this)
+                .request(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO
+                )
+                .subscribe();
     }
 
     /**
