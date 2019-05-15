@@ -32,7 +32,7 @@
         android:layout_margin="45dp"
         android:layout_weight="1"
         android:background="@drawable/selector_button_color"
-        android:text="  噪音测量  "
+        android:text="噪音测量"
         android:textColor="@color/button_text_color"
         android:textSize="35sp"
         android:textStyle="bold"/>
@@ -45,7 +45,7 @@
         android:layout_margin="45dp"
         android:layout_weight="1"
         android:background="@drawable/selector_button_color"
-        android:text="  纯音测试  "
+        android:text="纯音测试"
         android:textColor="@color/button_text_color"
         android:textSize="35sp"
         android:textStyle="bold"/>
