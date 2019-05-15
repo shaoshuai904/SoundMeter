@@ -18,8 +18,8 @@
 
 - PC端下载:
 
-http://android.myapp.com/myapp/detail.htm?apkName=com.maple.audiometry
+https://android.myapp.com/myapp/detail.htm?apkName=com.maple.audiometry
 
 - 移动端下载:
 
-http://a.app.qq.com/o/simple.jsp?pkgname=com.maple.audiometry
+https://a.app.qq.com/o/simple.jsp?pkgname=com.maple.audiometry
