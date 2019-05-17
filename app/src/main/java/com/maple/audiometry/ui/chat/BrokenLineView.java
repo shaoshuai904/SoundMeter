@@ -20,21 +20,25 @@ import java.util.Date;
 public class BrokenLineView extends View {
 
     private GraphicalView mChartView;
-    /** 渲染器 */
+    /**
+     * 渲染器
+     */
     private XYMultipleSeriesRenderer mRenderer;
-    /** 数据集合 */
+    /**
+     * 数据集合
+     */
     private XYMultipleSeriesDataset mDataset;
-    /** 时间序列 */
+    /**
+     * 时间序列
+     */
     private TimeSeries timeSeries;
 
     private Context mContext;
 
-    /** 最大缓存数 */
+    /**
+     * 最大缓存数
+     */
     public int maxCacheNum = 100;
-    /** X轴的时间缓存 */
-    Date[] xCache = new Date[maxCacheNum];
-    /** Y轴的值缓存 */
-    int[] yCache = new int[maxCacheNum];
 
     public BrokenLineView(Context context) {
         super(context);
@@ -49,24 +53,6 @@ public class BrokenLineView extends View {
         }
         return mChartView;
     }
-
-    // /**
-    // * 更新视图
-    // */
-    // public void updateTimeChart(double yValue) {
-    // mDataset.removeSeries(timeSeries);
-    // Log.e("", "当前数组大小：" + timeSeries.getItemCount());
-    // timeSeries.add(new Date(), yValue);
-    // Log.e("", "添加" + timeSeries.getItemCount());
-    // if (timeSeries.getItemCount() >= maxCacheNum) {
-    // timeSeries.remove(0);
-    // Log.e("", "删除：" + timeSeries.getItemCount());
-    // }
-    // // 在数据集中添加新的点集
-    // mDataset.addSeries(timeSeries);
-    // // 曲线更新
-    // mChartView.invalidate();
-    // }
 
     /**
      * 更新视图
@@ -84,23 +70,6 @@ public class BrokenLineView extends View {
         // 曲线更新
         mChartView.invalidate();
     }
-
-    // /**
-    // * 更新视图
-    // */
-    // public void updateTimeChart(short[] shorts) {
-    // mDataset.removeSeries(timeSeries);
-    // for (int i = 0; i < shorts.length; i++) {
-    // timeSeries.add(new Date(), shorts[i]);
-    // }
-    // while (timeSeries.getItemCount() >= maxCacheNum) {
-    // timeSeries.remove(0);
-    // }
-    // // 在数据集中添加新的点集
-    // mDataset.addSeries(timeSeries);
-    // // 曲线更新
-    // mChartView.invalidate();
-    // }
 
     /**
      * 获取渲染器

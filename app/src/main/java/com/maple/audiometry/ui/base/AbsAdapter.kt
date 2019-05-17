@@ -1,19 +1,20 @@
-package com.maple.audiometry.base
+package com.maple.audiometry.ui.base
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.BaseAdapter
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author maple
- * @time 16/4/13 下午5:55
+ * @time 2016/4/13
  */
-abstract class AbsAdapter<T>(var mContext: Context, datas: MutableList<T>?) : BaseAdapter() {
+abstract class AbsAdapter<T>(
+        mContext: Context,
+        datas: MutableList<T>?
+) : BaseAdapter() {
     var inflater: LayoutInflater
-
-    protected var mDatas: MutableList<T>
+    var mDatas: MutableList<T>
 
     init {
         inflater = LayoutInflater.from(mContext)

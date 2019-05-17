@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name=".ui.welcome.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,13 +26,13 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.home.MainActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".ui.activity.NoiseCheckActivity" />
-        <activity android:name=".ui.activity.VoiceActivity" />
-        <activity android:name=".ui.activity.TestActivity" />
-        <activity android:name=".ui.activity.ResultActivity" />
-        <activity android:name=".ui.activity.EndActivity" />
+        <activity android:name=".ui.home.NoiseCheckActivity" />
+        <activity android:name=".ui.home.VoiceActivity" />
+        <activity android:name=".ui.home.TestActivity" />
+        <activity android:name=".ui.home.ResultActivity" />
+        <activity android:name=".ui.home.EndActivity" />
 
     </application>
 

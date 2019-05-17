@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.activity;
+package com.maple.audiometry.ui.home;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.base.BaseFragmentActivity;
+import com.maple.audiometry.ui.base.BaseActivity;
 import com.maple.audiometry.ui.chat.BrokenLineView;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.MediaRecorderDemo;
@@ -33,7 +33,7 @@ import io.reactivex.functions.Consumer;
  *
  * @author shaoshuai
  */
-public class NoiseCheckActivity extends BaseFragmentActivity {
+public class NoiseCheckActivity extends BaseActivity {
     @BindView(R.id.tv_noise_value) TextView tv_noise_value;// 当前噪音值
     @BindView(R.id.tv_max_value) TextView tv_max_value;// 最大噪音值
     @BindView(R.id.tv_avg_value) TextView tv_avg_value;// 平均噪音值
@@ -88,24 +88,14 @@ public class NoiseCheckActivity extends BaseFragmentActivity {
                     .setScaleWidth(0.7)
                     .setMessage("您的监测环境不适合后面的测试，请您到较安静的环境下测试。")
                     .setLeftButton("取消", null)
-                    .setRightButton("重新检测", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            toMainPager();
-                        }
-                    })
+                    .setRightButton("重新检测", v -> toMainPager())
                     .show();
         } else {
             new AlertDialog(NoiseCheckActivity.this)
                     .setScaleWidth(0.7)
                     .setMessage("您的测试环境良好，可以继续后面测试。")
                     .setLeftButton("取消", null)
-                    .setRightButton("进入测试", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            toCheckEar();
-                        }
-                    })
+                    .setRightButton("进入测试", v -> toCheckEar())
                     .show();
         }
     }
@@ -117,14 +107,11 @@ public class NoiseCheckActivity extends BaseFragmentActivity {
         @Override
         public void run() {
             // 波动较大。用的较多
-            media = new MediaRecorderDemo(new NoiseValueUpdateCallback() {
-                @Override
-                public void onUpdateNoiseValue(double noiseValue) {
-                    Message msg = Message.obtain();
-                    msg.what = UPDATE_NOISE_VALUE;
-                    msg.obj = noiseValue;
-                    handler.sendMessage(msg);
-                }
+            media = new MediaRecorderDemo(noiseValue -> {
+                Message msg = Message.obtain();
+                msg.what = UPDATE_NOISE_VALUE;
+                msg.obj = noiseValue;
+                handler.sendMessage(msg);
             });
             media.startRecord();
             startTime = System.currentTimeMillis();
@@ -144,12 +131,9 @@ public class NoiseCheckActivity extends BaseFragmentActivity {
         dbExplain = getResources().getStringArray(R.array.db_explain_arr);
         new RxPermissions(this)
                 .request(Manifest.permission.RECORD_AUDIO)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean b) {
-                        if (b){
-                            handler.post(checkNoise);
-                        }
+                .subscribe(b -> {
+                    if (b){
+                        handler.post(checkNoise);
                     }
                 });
     }
@@ -162,12 +146,7 @@ public class NoiseCheckActivity extends BaseFragmentActivity {
                     .setScaleWidth(0.7)
                     .setTitle("是否退出检测？")
                     .setLeftButton("取消", null)
-                    .setRightButton("退出", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    })
+                    .setRightButton("退出", v -> finish())
                     .show();
         }
         return false;

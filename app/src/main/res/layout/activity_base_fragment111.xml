@@ -3,15 +3,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar" />
+    <include layout="@layout/activity_pager_top_bar" />
 
-    <LinearLayout
-        android:id="@+id/ll_root"
+    <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
 

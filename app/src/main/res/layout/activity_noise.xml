@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#ffffff"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="0dp"
             android:layout_gravity="right"
             android:layout_weight="1"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
 
         <ImageView
             android:id="@+id/title"
@@ -25,7 +25,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1.5"
-            android:src="@drawable/noise_title"/>
+            android:src="@drawable/noise_title" />
 
         <TextView
             android:id="@+id/tv_noise_value"
@@ -35,7 +35,7 @@
             android:layout_weight="1.5"
             android:gravity="center"
             android:text="50 dB"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="最高分贝:\n 90 dB"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_avg_value"
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="平均分贝:\n 65 dB"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_min_value"
@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="最低分贝:\n 40 dB"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,8 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_db_explain"
@@ -96,14 +95,14 @@
             android:gravity="center"
             android:text="说明"
             android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="～"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/tv_db_explain2"
@@ -113,7 +112,7 @@
             android:gravity="center"
             android:text="说明"
             android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

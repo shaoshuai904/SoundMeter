@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.activity;
+package com.maple.audiometry.ui.welcome;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.adapter.GuideViewPagerAdapter;
-import com.maple.audiometry.base.BaseFragmentActivity;
+import com.maple.audiometry.ui.base.BaseActivity;
+import com.maple.audiometry.ui.home.MainActivity;
 import com.maple.audiometry.utils.permission.RxPermissions;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class SplashActivity extends BaseFragmentActivity {
+public class SplashActivity extends BaseActivity {
     @BindView(R.id.guide_viewpager) ViewPager guide_viewpager;// vp
 
     private Button guide_start_btn;// 进入按钮

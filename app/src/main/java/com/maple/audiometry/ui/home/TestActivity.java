@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.activity;
+package com.maple.audiometry.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.base.BaseFragmentActivity;
+import com.maple.audiometry.ui.base.BaseActivity;
 import com.maple.audiometry.utils.ArrayUtils;
 import com.maple.audiometry.utils.AudioTrackManager;
 import com.maple.audiometry.utils.T;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  *
  * @author shaoshuai
  */
-public class TestActivity extends BaseFragmentActivity implements OnClickListener {
+public class TestActivity extends BaseActivity implements OnClickListener {
     @BindView(R.id.tv_play_des) TextView tv_play_des;
     @BindView(R.id.tv_current_hz) TextView tv_current_hz;// 当前频率
     @BindView(R.id.tv_current_db) TextView tv_current_db;// 当前分贝
@@ -89,12 +89,7 @@ public class TestActivity extends BaseFragmentActivity implements OnClickListene
             new AlertDialog(TestActivity.this)
                     .setTitle("是否退出当前测试？")
                     .setLeftButton("取消", null)
-                    .setRightButton("退出", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    })
+                    .setRightButton("退出", v -> finish())
                     .show();
         }
         return false;
