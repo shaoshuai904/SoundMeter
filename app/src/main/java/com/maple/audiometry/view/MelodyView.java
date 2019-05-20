@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.chat;
+package com.maple.audiometry.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.maple.audiometry.R;
-import com.maple.audiometry.bean.ContextMargin;
 import com.maple.audiometry.utils.DensityUtils;
 
 import java.util.ArrayList;
@@ -168,22 +167,22 @@ public class MelodyView extends View {
         float yVol = yMaxValue - yMinValue;
         recPaint.setTextAlign(Align.RIGHT);// 右边是线
         for (int i = 0; i < yLineCount; i++) {
-            canvas.drawLine(margin.left, yAxisPointArr[i], getWidth()
-                    - margin.right, yAxisPointArr[i], paintLine);
+            canvas.drawLine(margin.getLeft(), yAxisPointArr[i], getWidth()
+                    - margin.getRight(), yAxisPointArr[i], paintLine);
             // dB 刻度
             int yVal = (int) (yMinValue + (yVol / (yLineCount - 1)) * i);
             canvas.drawText(yVal + "",
-                    margin.left - DensityUtils.dp2px(mContext, 2),
+                    margin.getLeft() - DensityUtils.dp2px(mContext, 2),
                     yAxisPointArr[i] + DensityUtils.dp2px(mContext, 4),
                     recPaint);
         }
         // 画竖线
         recPaint.setTextAlign(Align.CENTER);// 线中间
         for (int j = 0; j < xLineCount; j++) {
-            canvas.drawLine(xAxisPointArr[j], margin.top, xAxisPointArr[j],
-                    this.getHeight() - margin.bottom, paintLine);
+            canvas.drawLine(xAxisPointArr[j], margin.getTop(), xAxisPointArr[j],
+                    this.getHeight() - margin.getBottom(), paintLine);
             // Hz 刻度
-            canvas.drawText(xStr[j], xAxisPointArr[j], margin.top
+            canvas.drawText(xStr[j], xAxisPointArr[j], margin.getTop()
                     - DensityUtils.dp2px(mContext, 2), recPaint);
         }
 
@@ -284,7 +283,7 @@ public class MelodyView extends View {
         // Y轴坐标 从上往下，递增
         float tempInterval = (yMaxValue - yMinValue) / viewHeight; // Y轴1像素对应的数值
         int yPoint = (int) (viewHeight - (Math.abs(yMaxValue - data))
-                / tempInterval + margin.top);
+                / tempInterval + margin.getTop());
         return yPoint;
     }
 
@@ -299,16 +298,16 @@ public class MelodyView extends View {
      */
     private void measureMargin() {
         // 计算X轴刻度
-        viewWidth = this.getWidth() - margin.left - margin.right;
+        viewWidth = this.getWidth() - margin.getLeft() - margin.getRight();
         xAxisPointArr = new int[xLineCount];
         for (int i = 0; i < xAxisPointArr.length; i++) {
-            xAxisPointArr[i] = (int) (viewWidth / (xLineCount - 1) * i + margin.left);
+            xAxisPointArr[i] = (int) (viewWidth / (xLineCount - 1) * i + margin.getLeft());
         }
         // 计算Y轴刻度
-        viewHeight = this.getHeight() - margin.top - margin.bottom;
+        viewHeight = this.getHeight() - margin.getTop() - margin.getBottom();
         yAxisPointArr = new int[yLineCount];
         for (int i = 0; i < yAxisPointArr.length; i++) {
-            yAxisPointArr[i] = (int) (viewHeight / (yLineCount - 1) * i + margin.top);
+            yAxisPointArr[i] = (int) (viewHeight / (yLineCount - 1) * i + margin.getTop());
         }
     }
 

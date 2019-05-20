@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseActivity
+import com.maple.audiometry.ui.detection.DetectionActivity
+import com.maple.audiometry.ui.noise.NoiseCheckActivity
 import com.maple.msdialog.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,14 +26,14 @@ class MainActivity : BaseActivity() {
     }
 
     // 去检测噪音
-    fun toCheckNoise() {
+    private fun toCheckNoise() {
         val intent = Intent(this, NoiseCheckActivity::class.java)
         startActivity(intent)
     }
 
     // 去检查耳朵
-    fun toCheckEar() {
-        val intent = Intent(this, VoiceActivity::class.java)
+    private fun toCheckEar() {
+        val intent = Intent(this, DetectionActivity::class.java)
         startActivity(intent)
     }
 
@@ -41,9 +43,8 @@ class MainActivity : BaseActivity() {
                 .setScaleWidth(0.7)
                 .setTitle("是否退出？")
                 .setLeftButton("取消", null)
-                .setRightButton("退出") { v -> finish() }
+                .setRightButton("退出") { finish() }
                 .show()
     }
-
 
 }

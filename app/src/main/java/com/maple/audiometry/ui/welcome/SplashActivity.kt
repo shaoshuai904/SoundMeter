@@ -44,9 +44,9 @@ class SplashActivity : BaseActivity() {
     private fun initViews() {
         // 初始化页面
         val inflater = LayoutInflater.from(this)
-        val guideView1 = inflater.inflate(R.layout.activity_guide_view1, null)
-        val guideView2 = inflater.inflate(R.layout.activity_guide_view2, null)
-        val guideView3 = inflater.inflate(R.layout.activity_guide_view3, null)
+        val guideView1 = inflater.inflate(R.layout.view_guide_1, null)
+        val guideView2 = inflater.inflate(R.layout.view_guide_2, null)
+        val guideView3 = inflater.inflate(R.layout.view_guide_3, null)
         val guideStartBtn: Button = guideView3.findViewById(R.id.next)
         guideStartBtn.setOnClickListener { goMainUi() }
         // 初始化点

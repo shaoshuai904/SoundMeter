@@ -11,7 +11,6 @@
 
     <application
         android:name=".PureToneApp"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -25,15 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.home.MainActivity"
-            android:launchMode="singleTop" />
-        <activity android:name=".ui.home.NoiseCheckActivity" />
-        <activity android:name=".ui.home.VoiceActivity" />
-        <activity android:name=".ui.home.TestActivity" />
-        <activity android:name=".ui.home.ResultActivity" />
-        <activity android:name=".ui.home.EndActivity" />
-
+        <activity android:name=".ui.home.MainActivity" />
+        <activity android:name=".ui.detection.DetectionActivity" />
+        <activity android:name=".ui.noise.NoiseCheckActivity" />
     </application>
 
 </manifest>

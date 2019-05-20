@@ -1,28 +1,40 @@
-package com.maple.audiometry.ui.home
+package com.maple.audiometry.ui.detection
 
 import android.content.Context
-import android.content.Intent
 import android.media.AudioManager
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.base.BaseActivity
+import com.maple.audiometry.ui.base.BaseFragment
 import com.maple.audiometry.utils.AudioTrackManager
-import kotlinx.android.synthetic.main.activity_voice.*
+import kotlinx.android.synthetic.main.activity_base_top_bar.*
+import kotlinx.android.synthetic.main.fragment_voice.*
 
 /**
  * 左耳右耳检测界面
  *
  * @author shaoshuai
  */
-class VoiceActivity : BaseActivity() {
+class VoiceFragment : BaseFragment() {
     var audio: AudioTrackManager? = null
     var volume = 0F
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_voice)
+    private lateinit var mActivity: DetectionActivity
 
-        val mAudioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.fragment_voice, container, false)
+        view.isClickable = true
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mActivity = activity as DetectionActivity
+        mActivity.setTitle("纯音测试")
+
+        val mAudioManager = mActivity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         volume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM).toFloat()// 获取系统音量
         AudioTrackManager.setVolume(volume)
 
@@ -31,10 +43,10 @@ class VoiceActivity : BaseActivity() {
         bt_test.setOnClickListener { MyThread().start() }// 测试设备
     }
 
-    override fun onRestart() {
+    override fun onResume() {
+        super.onResume()
         if (audio != null)
             audio!!.stop()
-        super.onRestart()
     }
 
     inner class MyThread : Thread() {
@@ -82,10 +94,10 @@ class VoiceActivity : BaseActivity() {
      * 前往测试界面
      */
     private fun toTestPager(isLeft: Boolean) {
-        val intent = Intent(this, TestActivity::class.java)
-        val bundle = Bundle()
-        bundle.putBoolean("isLeft", isLeft)
-        intent.putExtras(bundle)
-        startActivity(intent)
+        mActivity.isLeft = isLeft
+        mActivity.replaceView(TestFragment())
+//        val intent = Intent(mActivity, TestActivity::class.java)
+//        intent.putExtra("isLeft", isLeft)
+//        startActivity(intent)
     }
 }

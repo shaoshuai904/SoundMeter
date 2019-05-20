@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.home
+package com.maple.audiometry.ui.noise
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -10,10 +10,11 @@ import android.view.KeyEvent
 import android.widget.FrameLayout.LayoutParams
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseActivity
-import com.maple.audiometry.ui.chat.BrokenLineView
+import com.maple.audiometry.ui.detection.DetectionActivity
 import com.maple.audiometry.utils.ArrayUtils
 import com.maple.audiometry.utils.MediaRecorderDemo
 import com.maple.audiometry.utils.permission.RxPermissions
+import com.maple.audiometry.view.BrokenLineView
 import com.maple.msdialog.AlertDialog
 import kotlinx.android.synthetic.main.activity_noise.*
 import java.util.*
@@ -67,21 +68,6 @@ class NoiseCheckActivity : BaseActivity() {
 
     }
 
-    /**
-     * 检测噪音
-     */
-    var checkNoise: Runnable = Runnable {
-        // 波动较大。用的较多
-        media = MediaRecorderDemo { noiseValue ->
-            val msg = Message.obtain()
-            msg.what = UPDATE_NOISE_VALUE
-            msg.obj = noiseValue
-            handler.sendMessage(msg)
-        }
-        media!!.startRecord()
-        startTime = System.currentTimeMillis()
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +85,21 @@ class NoiseCheckActivity : BaseActivity() {
                         handler.post(checkNoise)
                     }
                 }
+    }
+
+    /**
+     * 检测噪音
+     */
+    private var checkNoise: Runnable = Runnable {
+        // 波动较大。用的较多
+        media = MediaRecorderDemo { noiseValue ->
+            val msg = Message.obtain()
+            msg.what = UPDATE_NOISE_VALUE
+            msg.obj = noiseValue
+            handler.sendMessage(msg)
+        }
+        media!!.startRecord()
+        startTime = System.currentTimeMillis()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -126,7 +127,7 @@ class NoiseCheckActivity : BaseActivity() {
      */
     private fun toCheckEar() {
         finish()
-        val intent = Intent(this, VoiceActivity::class.java)
+        val intent = Intent(this, DetectionActivity::class.java)
         startActivity(intent)
     }
 
@@ -173,14 +174,14 @@ class NoiseCheckActivity : BaseActivity() {
     private fun showDialog() {
         // 平均噪音分贝 > 40dB
         if (ArrayUtils.avg(allVolume) > 40) {
-            AlertDialog(this@NoiseCheckActivity)
+            AlertDialog(mContext)
                     .setScaleWidth(0.7)
                     .setMessage("您的监测环境不适合后面的测试，请您到较安静的环境下测试。")
                     .setLeftButton("取消", null)
                     .setRightButton("重新检测") { toMainPager() }
                     .show()
         } else {
-            AlertDialog(this@NoiseCheckActivity)
+            AlertDialog(mContext)
                     .setScaleWidth(0.7)
                     .setMessage("您的测试环境良好，可以继续后面测试。")
                     .setLeftButton("取消", null)

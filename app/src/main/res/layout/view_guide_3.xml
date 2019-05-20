@@ -1,16 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/introduce">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/introduce">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="120dip"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:contentDescription="@null"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/title"
@@ -22,15 +22,15 @@
         android:text="操作步骤"
         android:textColor="#437844"
         android:textSize="50sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
         android:scrollbars="vertical">
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/introduceText2"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </ScrollView>
 
     <Button
@@ -47,14 +47,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="75dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="75dp"
         android:background="@drawable/selector_button_color"
         android:text="立即体验"
         android:textColor="@color/button_text_color"
         android:textSize="25sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

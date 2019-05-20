@@ -33,13 +33,11 @@ abstract class BaseActivity : FragmentActivity() {
 
     // ------------------ fragment method ------------------
 
-    @JvmOverloads
     fun addView(fgView: Fragment, containerViewId: Int = R.id.fl_content) {
         val ft = supportFragmentManager.beginTransaction()
         ft.add(containerViewId, fgView).commit()
     }
 
-    @JvmOverloads
     fun replaceView(fgView: Fragment, containerViewId: Int = R.id.fl_content) {
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(containerViewId, fgView)
@@ -47,7 +45,7 @@ abstract class BaseActivity : FragmentActivity() {
         ft.commit()
     }
 
-    private fun backFragment() {
+    fun backFragment() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
         } else {

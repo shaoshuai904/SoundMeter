@@ -1,10 +1,14 @@
-package com.maple.audiometry.ui.home
+package com.maple.audiometry.ui.detection
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_end.*
+import com.maple.audiometry.ui.home.MainActivity
+import com.maple.audiometry.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_end.*
 import java.text.DecimalFormat
 
 /**
@@ -12,34 +16,34 @@ import java.text.DecimalFormat
  *
  * @author shaoshuai
  */
-class EndActivity : BaseActivity() {
-    lateinit var fbl: IntArray
-    lateinit var fbr: IntArray
-    var left: Double = 0.0
-    var right: Double = 0.0
+class EndFragment : BaseFragment() {
+    private lateinit var mActivity: DetectionActivity
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_end)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.fragment_end, container, false)
+        view.isClickable = true
+        return view
+    }
 
-        fbl = intent.getIntArrayExtra("left")
-        fbr = intent.getIntArrayExtra("right")
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mActivity = activity as DetectionActivity
+        mActivity.setTitle("分析报告")
 
         initView()
-
-        bt_end.setOnClickListener { toMainPager() }
     }
 
     private fun initView() {
+        val fbl = mActivity.leftEarData
+        val fbr = mActivity.rightEarData
         // 给出平均听力=（1000Hz测试的结果+2000Hz测试得到结果+500Hz测试得到结果）/3
-        left = (fbl[0] + fbl[1] + fbl[4]) / 3.0
-        right = (fbr[0] + fbr[1] + fbr[4]) / 3.0
-        val df = DecimalFormat("##.00")
-
+        val left = (fbl[0] + fbl[1] + fbl[4]) / 3.0
+        val right = (fbr[0] + fbr[1] + fbr[4]) / 3.0
+        // 结果
         val leftRank = computeRank(left)
         val rightRank = computeRank(right)
-        // 结果
         // 听力等级
+        val df = DecimalFormat("##.00")
         val hearingRank = resources.getStringArray(R.array.hearing_rank_arr)
         val leftStr = "左耳：" + df.format(left) + "(" + hearingRank[leftRank] + ")"
         val rightStr = "右耳：" + df.format(right) + "(" + hearingRank[rightRank] + ")"
@@ -52,6 +56,8 @@ class EndActivity : BaseActivity() {
         } else {
             tv_propose.text = "左耳：\n" + dbExplain[leftRank] + "\n右耳：\n" + dbExplain[rightRank]
         }
+
+        bt_end.setOnClickListener { toMainPager() }
     }
 
     /**
@@ -75,13 +81,12 @@ class EndActivity : BaseActivity() {
         return rank
     }
 
-
     /**
      * 返回主界面
      */
-    fun toMainPager() {
-        finish()
-        val intent = Intent(this, MainActivity::class.java)
+    private fun toMainPager() {
+        mActivity.finish()
+        val intent = Intent(mActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }

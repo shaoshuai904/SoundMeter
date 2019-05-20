@@ -1,16 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/introduce">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/introduce">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="120dip"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:contentDescription="@null"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/title"
@@ -22,15 +22,15 @@
         android:text="简介"
         android:textColor="#437844"
         android:textSize="50sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
         android:scrollbars="vertical">
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/introduceText1"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </ScrollView>
 
 </RelativeLayout>

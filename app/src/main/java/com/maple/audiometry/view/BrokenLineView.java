@@ -1,4 +1,4 @@
-package com.maple.audiometry.ui.chat;
+package com.maple.audiometry.view;
 
 import android.content.Context;
 import android.graphics.Color;
