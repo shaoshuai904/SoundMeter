@@ -20,16 +20,9 @@ class DetectionActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_fragment111)
-
-        rl_top_bar.visibility = View.GONE
-        tv_left.setOnClickListener { onBackPressed() }
+        setContentView(R.layout.activity_base_fragment)
 
         addView(VoiceFragment())
-    }
-
-    fun setTitle(title: String) {
-        tv_title.text = title
     }
 
 }

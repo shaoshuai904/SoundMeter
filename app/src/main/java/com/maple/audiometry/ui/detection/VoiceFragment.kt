@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseFragment
 import com.maple.audiometry.utils.AudioTrackManager
-import kotlinx.android.synthetic.main.activity_base_top_bar.*
 import kotlinx.android.synthetic.main.fragment_voice.*
 
 /**
@@ -32,7 +31,6 @@ class VoiceFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mActivity = activity as DetectionActivity
-        mActivity.setTitle("纯音测试")
 
         val mAudioManager = mActivity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         volume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM).toFloat()// 获取系统音量
@@ -96,8 +94,5 @@ class VoiceFragment : BaseFragment() {
     private fun toTestPager(isLeft: Boolean) {
         mActivity.isLeft = isLeft
         mActivity.replaceView(TestFragment())
-//        val intent = Intent(mActivity, TestActivity::class.java)
-//        intent.putExtra("isLeft", isLeft)
-//        startActivity(intent)
     }
 }

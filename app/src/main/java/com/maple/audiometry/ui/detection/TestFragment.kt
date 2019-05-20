@@ -12,6 +12,7 @@ import com.maple.audiometry.utils.ArrayUtils
 import com.maple.audiometry.utils.AudioTrackManager
 import com.maple.audiometry.utils.T
 import com.maple.msdialog.AlertDialog
+import kotlinx.android.synthetic.main.activity_base_top_bar.*
 import kotlinx.android.synthetic.main.fragment_test.*
 
 /**
@@ -55,7 +56,9 @@ class TestFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mActivity = activity as DetectionActivity
-        mActivity.setTitle("测试")
+
+        tv_left.setOnClickListener { mActivity.onBackPressed() }
+        tv_title.text = "测试"
 
         isLeft = mActivity.isLeft
 
@@ -232,12 +235,6 @@ class TestFragment : BaseFragment() {
         mActivity.leftEarData = lDB
         mActivity.rightEarData = rDB
         mActivity.replaceView(ResultFragment())
-
-//        mActivity.finish()
-//        val intent = Intent(mActivity, DetectionActivity::class.java)
-//        intent.putExtra("left", lDB)// 左耳听力数据
-//        intent.putExtra("right", rDB)// 右耳听力数据
-//        startActivity(intent)
     }
 
     /**

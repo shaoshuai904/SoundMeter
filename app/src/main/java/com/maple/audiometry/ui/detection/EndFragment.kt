@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.home.MainActivity
 import com.maple.audiometry.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.activity_base_top_bar.*
 import kotlinx.android.synthetic.main.fragment_end.*
 import java.text.DecimalFormat
 
@@ -28,7 +29,9 @@ class EndFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mActivity = activity as DetectionActivity
-        mActivity.setTitle("分析报告")
+
+        tv_left.setOnClickListener { mActivity.onBackPressed() }
+        tv_title.text = "分析报告"
 
         initView()
     }

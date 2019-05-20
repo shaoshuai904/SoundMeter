@@ -4,6 +4,8 @@
     android:background="#5a6d71"
     android:orientation="vertical">
 
+    <include layout="@layout/activity_base_top_bar" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="260dp">

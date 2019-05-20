@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseFragment
 import com.maple.audiometry.view.MelodyView
+import kotlinx.android.synthetic.main.activity_base_top_bar.*
 import kotlinx.android.synthetic.main.fragment_result.*
 
 /**
@@ -27,7 +28,9 @@ class ResultFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mActivity = activity as DetectionActivity
-        mActivity.setTitle("测试结果")
+
+        tv_left.setOnClickListener { mActivity.onBackPressed() }
+        tv_title.text = "测试结果"
 
         initView()
     }
