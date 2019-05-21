@@ -30,21 +30,15 @@ class TestFragment : BaseFragment() {
     private val dBArr = intArrayOf(-10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120)
     private var lDBMinVal = Array(6) { IntArray(2) }
     private var rDBMinVal = Array(6) { IntArray(2) }
-    // 当前分贝索引
-    var curDB = defCurDB
-    // 当前频率索引
-    var curHZ = defCurHZ
-    // 是否第一次听到
-    var isFirst = true
-    // 是否测试左耳
-    var isLeft = true
-    // 左耳测试完成
-    var leftCheckOver = false
-    // 右耳测试完成
-    var rightCheckOver = false
+    private var curDB = defCurDB// 当前分贝索引
+    private var curHZ = defCurHZ// 当前频率索引
+    private var isFirst = true// 是否第一次听到
+    private var isLeft = true// 是否测试左耳
+    private var leftCheckOver = false// 左耳测试完成
+    private var rightCheckOver = false// 右耳测试完成
 
     private lateinit var mActivity: DetectionActivity
-    var audio: AudioTrackManager? = null
+    private var audio: AudioTrackManager? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -216,7 +210,7 @@ class TestFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun updateDes() {
-        tv_play_des.text = hzArr[curHZ].toString() + " Hz\n" + dBArr[curDB] + " dB"
+        tv_play_des.text = "${hzArr[curHZ]} Hz\n${dBArr[curDB]} dB"
         tv_current_hz.text = "当前频率:\n ${hzArr[curHZ]} Hz"
         tv_current_db.text = "当前分贝:\n ${dBArr[curDB]} dB"
     }
