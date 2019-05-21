@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">纯音测听</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="confirm">确定</string>
     <string name="cancel">取消</string>
 
     <string-array name="db_explain_arr">

@@ -4,27 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
-    <color name="background_tab_pressed">#6633B5E5</color>
-    <color name="main_bg">#EEEEEE</color>
-    <color name="topbar_bg">#E63434</color> <!-- 标题头 -->
-    <color name="functionbar_bg">#FFca4c</color> <!-- 功能栏目 -->
-
-    <color name="bottombar_bg">#E63434</color> <!-- 底部导航栏 -->
-    <color name="bottombar_text_color">#FFFFFF</color> <!-- 底部导航栏 -->
-    <color name="parting_line">#E3E3E3</color> <!-- 分割线 -->
-
-    <color name="person_textBar_bg">#34b5a1</color> <!-- 标题背景 -->
-    <color name="person_textColor">#FFFFFF</color> <!-- 标题颜色 -->
-
-    <color name="person_list_bg">#FFFFFF</color> <!-- Item列表背景 -->
-
-    <color name="button_bg">#FFCA4B</color> <!-- button颜色 -->
-    <color name="button_click_bg">#FFFF9C</color> <!-- button点击颜色 -->
-
     <color name="button_text_color">#ffffff</color> <!-- button字体颜色 -->
-    <color name="button_focus_text_color">#00a651</color> <!-- button选中字体颜色 -->
-    <color name="button_bg_default">#FFFFFF</color>
-    <color name="button_bg_pressed">#F1F1F1</color>
 
 </resources>
