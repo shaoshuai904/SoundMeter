@@ -3,10 +3,10 @@ package com.maple.audiometry.ui.home
 import android.content.Intent
 import android.os.Bundle
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.base.BaseActivity
+import com.maple.audiometry.ui.base.BaseFragmentActivity
 import com.maple.audiometry.ui.detection.DetectionActivity
 import com.maple.audiometry.ui.noise.NoiseCheckActivity
-import com.maple.msdialog.AlertDialog
+import com.maple.audiometry.utils.T
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  * @author maple
  */
-class MainActivity : BaseActivity() {
+class MainActivity : BaseFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +37,14 @@ class MainActivity : BaseActivity() {
         startActivity(intent)
     }
 
+    private var exitTime: Long = 0
     override fun onBackPressed() {
-        super.onBackPressed()
-        AlertDialog(this)
-                .setScaleWidth(0.7)
-                .setTitle("是否退出？")
-                .setLeftButton("取消", null)
-                .setRightButton("退出") { finish() }
-                .show()
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            T.showShort(mContext, "再按一次退出程序")
+            exitTime = System.currentTimeMillis()
+        } else {
+            finish()
+        }
     }
 
 }

@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout.LayoutParams
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.base.BaseActivity
 import com.maple.audiometry.ui.base.BaseFragment
+import com.maple.audiometry.ui.base.BaseFragmentActivity
 import com.maple.audiometry.ui.detection.DetectionActivity
 import com.maple.audiometry.utils.ArrayUtils
 import com.maple.audiometry.utils.MediaRecorderDemo
@@ -31,20 +31,24 @@ class NoiseCheckFragment : BaseFragment() {
     companion object {
         /** 检测时间最大时间  */
         const val checkTime = 15 * 1000
+
         /** 更新噪音标志  */
         const val UPDATE_NOISE_VALUE = 1
     }
 
     /** 检测噪音的开始时间  */
     private var startTime: Long = 0
+
     /** 检测噪音工具类  */
     private var media: MediaRecorderDemo? = null
     private lateinit var mBrokenLine: BrokenLineView
 
     private var maxVolume = 0.0
     private var minVolume = 99990.0
+
     /** 检测到的所有噪音分贝值  */
     private val allVolume = ArrayList<Double>()
+
     /** 噪音分贝值 的说明文字  */
     private lateinit var dbExplain: Array<String>
 
@@ -71,7 +75,7 @@ class NoiseCheckFragment : BaseFragment() {
 
     }
 
-    private lateinit var mActivity: BaseActivity
+    private lateinit var mActivity: BaseFragmentActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.activity_noise, container, false)
@@ -81,7 +85,7 @@ class NoiseCheckFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mActivity = activity as BaseActivity
+        mActivity = activity as BaseFragmentActivity
 
         mBrokenLine = BrokenLineView(mContext)
         ll_chart_view.addView(mBrokenLine.execute(), LayoutParams(

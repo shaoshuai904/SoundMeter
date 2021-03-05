@@ -10,11 +10,15 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
+
 import com.maple.audiometry.R;
-import com.maple.audiometry.utils.DensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.maple.msdialog.utils.DensityUtils.dp2px;
+import static com.maple.msdialog.utils.DensityUtils.sp2px;
 
 /**
  * 歌曲旋律图
@@ -95,13 +99,13 @@ public class MelodyView extends View {
         recPaint = new Paint();
         recPaint.setColor(Color.RED);
         recPaint.setTextAlign(Align.RIGHT);
-        recPaint.setTextSize(DensityUtils.sp2px(mContext, 10));// 设置字体大小
+        recPaint.setTextSize(sp2px(mContext, 10));// 设置字体大小
         recPaint.setTypeface(Typeface.SANS_SERIF);// 设置字体样式
 
-        margin.updateMargin(DensityUtils.dp2px(mContext, 20),
-                DensityUtils.dp2px(mContext, 12),
-                DensityUtils.dp2px(mContext, 12),
-                DensityUtils.dp2px(mContext, 12));// 初始化视图边距
+        margin.updateMargin(dp2px(mContext, 20),
+                dp2px(mContext, 12),
+                dp2px(mContext, 12),
+                dp2px(mContext, 12));// 初始化视图边距
         // 初始化数据
         leftDatas = new int[xLineCount];
         rightDatas = new int[xLineCount];
@@ -112,10 +116,8 @@ public class MelodyView extends View {
         // 当前位置-图片
         // 初始化指针
         pointerImgList = new ArrayList<Drawable>();
-        pointerImgList.add(mContext.getResources().getDrawable(
-                R.drawable.left_ear_tag));
-        pointerImgList.add(mContext.getResources().getDrawable(
-                R.drawable.right_ear_tag));
+        pointerImgList.add(ContextCompat.getDrawable(mContext, R.drawable.left_ear_tag));
+        pointerImgList.add(ContextCompat.getDrawable(mContext, R.drawable.right_ear_tag));
         tagImg = pointerImgList.get(0);
     }
 
@@ -172,8 +174,8 @@ public class MelodyView extends View {
             // dB 刻度
             int yVal = (int) (yMinValue + (yVol / (yLineCount - 1)) * i);
             canvas.drawText(yVal + "",
-                    margin.getLeft() - DensityUtils.dp2px(mContext, 2),
-                    yAxisPointArr[i] + DensityUtils.dp2px(mContext, 4),
+                    margin.getLeft() - dp2px(mContext, 2),
+                    yAxisPointArr[i] + dp2px(mContext, 4),
                     recPaint);
         }
         // 画竖线
@@ -182,8 +184,7 @@ public class MelodyView extends View {
             canvas.drawLine(xAxisPointArr[j], margin.getTop(), xAxisPointArr[j],
                     this.getHeight() - margin.getBottom(), paintLine);
             // Hz 刻度
-            canvas.drawText(xStr[j], xAxisPointArr[j], margin.getTop()
-                    - DensityUtils.dp2px(mContext, 2), recPaint);
+            canvas.drawText(xStr[j], xAxisPointArr[j], margin.getTop() - dp2px(mContext, 2), recPaint);
         }
 
     }
@@ -282,13 +283,11 @@ public class MelodyView extends View {
         // return yPoint;
         // Y轴坐标 从上往下，递增
         float tempInterval = (yMaxValue - yMinValue) / viewHeight; // Y轴1像素对应的数值
-        int yPoint = (int) (viewHeight - (Math.abs(yMaxValue - data))
-                / tempInterval + margin.getTop());
+        int yPoint = (int) (viewHeight - (Math.abs(yMaxValue - data)) / tempInterval + margin.getTop());
         return yPoint;
     }
 
-    protected void onLayout(boolean paramBoolean, int paramInt1, int paramInt2,
-                            int paramInt3, int paramInt4) {
+    protected void onLayout(boolean paramBoolean, int paramInt1, int paramInt2, int paramInt3, int paramInt4) {
         super.onLayout(paramBoolean, paramInt1, paramInt2, paramInt3, paramInt4);
         measureMargin();
     }

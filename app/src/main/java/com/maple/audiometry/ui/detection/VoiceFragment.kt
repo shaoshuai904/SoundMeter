@@ -43,8 +43,7 @@ class VoiceFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (audio != null)
-            audio!!.stop()
+        audio?.stop()
     }
 
     inner class MyThread : Thread() {
@@ -76,8 +75,7 @@ class VoiceFragment : BaseFragment() {
      * @param isLeft 是否是左耳
      */
     fun startPlay(hz: Int, db: Int, isLeft: Boolean) {
-        if (audio != null)
-            audio!!.stop()
+        audio?.stop()
         audio = AudioTrackManager()
         audio?.setRate(hz, db)// 设置频率
         if (isLeft) {

@@ -56,12 +56,7 @@ class TestFragment : BaseFragment() {
 
         isLeft = mActivity.isLeft
 
-        if (isLeft) {
-            tv_explain.text = "左耳"
-        } else {
-            tv_explain.text = "右耳"
-        }
-
+        tv_explain.text = if (isLeft) "左耳" else "右耳"
         bt_play.setOnClickListener {
             startPlay(hzArr[curHZ], dBArr[curDB], isLeft)
             toResult()
@@ -73,13 +68,12 @@ class TestFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (audio != null)
-            audio!!.stop()
+        audio?.stop()
     }
 
     override fun onKeyBackPressed(): Boolean {
         AlertDialog(mContext)
-                .setTitle("是否退出当前测试？")
+                .setDialogTitle("是否退出当前测试？")
                 .setLeftButton("取消", null)
                 .setRightButton("退出") { mActivity.backFragment() }
                 .show()
@@ -238,16 +232,15 @@ class TestFragment : BaseFragment() {
      * @param isLeft 是否是左耳
      */
     private fun startPlay(hz: Int, db: Int, isLeft: Boolean) {
-        if (audio != null)
-            audio!!.stop()
+        audio?.stop()
         audio = AudioTrackManager()
-        audio!!.setRate(hz, db)// 设置频率
+        audio?.setRate(hz, db)// 设置频率
         if (isLeft) {
-            audio!!.start(AudioTrackManager.LEFT)
+            audio?.start(AudioTrackManager.LEFT)
         } else {
-            audio!!.start(AudioTrackManager.RIGHT)
+            audio?.start(AudioTrackManager.RIGHT)
         }
-        audio!!.play()
+        audio?.play()
     }
 
     /**

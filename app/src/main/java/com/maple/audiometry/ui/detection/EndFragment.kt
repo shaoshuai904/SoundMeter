@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.home.MainActivity
 import com.maple.audiometry.ui.base.BaseFragment
+import com.maple.audiometry.ui.home.MainActivity
 import kotlinx.android.synthetic.main.activity_base_top_bar.*
 import kotlinx.android.synthetic.main.fragment_end.*
 import java.text.DecimalFormat

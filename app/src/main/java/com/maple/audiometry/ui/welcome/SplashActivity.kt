@@ -3,13 +3,13 @@ package com.maple.audiometry.ui.welcome
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.maple.audiometry.R
-import com.maple.audiometry.ui.base.BaseActivity
+import com.maple.audiometry.ui.base.BaseFragmentActivity
 import com.maple.audiometry.ui.home.MainActivity
 import com.maple.audiometry.utils.permission.RxPermissions
 import kotlinx.android.synthetic.main.activity_guide.*
@@ -20,7 +20,7 @@ import java.util.*
  *
  * @author shaoshuai
  */
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseFragmentActivity() {
     private lateinit var guideDotList: Array<ImageView> // 点集合
     private lateinit var guideViews: ArrayList<View> // 页面集合
     private var guideViewPagerAdapter: GuideViewPagerAdapter? = null

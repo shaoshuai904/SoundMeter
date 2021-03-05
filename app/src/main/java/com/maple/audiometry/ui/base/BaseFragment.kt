@@ -1,11 +1,13 @@
 package com.maple.audiometry.ui.base
 
 import android.content.Context
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 /**
+ * Fragment基类
+ *
  * @author maple
- * @time 2018/10/11
+ * @time 2018/12/22
  */
 abstract class BaseFragment : Fragment() {
     lateinit var mContext: Context
@@ -19,6 +21,5 @@ abstract class BaseFragment : Fragment() {
         // 是否消耗掉back事件
         return false
     }
-
 }
 
